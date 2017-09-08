@@ -17,7 +17,7 @@
             <tr>
                 <td><font size="10"> Select Firm: </font></td>
                 <td>
-                    <select id="selectFirm" multiple>
+                    <select id="selectFirm">
                       <optgroup>
                         <#list firmList as firm>
                             <option value="${firm.gstNo}">${firm.firmName}</option>
@@ -111,7 +111,7 @@
                     alert("Error ! Hint: Please select an item and enter its quantity"); return;
                 }
                 var str = JSON.stringify(entity);
-                //alert(str);
+                alert(str);
                 $.ajax({
                    type: "POST",	url: "/invoice", dataType: "json",
                    contentType: "application/json; charset=utf-8",

@@ -1,7 +1,14 @@
 <html>
 <head><title></title>
+    <link href="http://cdn-na.infragistics.com/igniteui/2017.1/latest/css/themes/infragistics/infragistics.theme.css" rel="stylesheet" />
+    <link href="http://cdn-na.infragistics.com/igniteui/2017.1/latest/css/structure/infragistics.css" rel="stylesheet" />
+
+
+</head>
 <body>
 <div id="content" caption="Transactions">
+        <div class=".ui-widget-overlay"></div>
+
    <div id="checkboxSelectPartyCombo"></div>
    <input type="button" value="Filter" onclick="filter()" />
    <table border="1" >
@@ -28,9 +35,23 @@
     <script src="/assets/js/jqueryui.js"></script>
     <script src="/assets/js/Transaction.js"></script>
     <script src="/assets/js/main.js"></script>
+      <script src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+        <!-- Ignite UI Required Combined JavaScript Files -->
+        <script src="http://cdn-na.infragistics.com/igniteui/2017.1/latest/js/infragistics.core.js"></script>
+        <script src="http://cdn-na.infragistics.com/igniteui/2017.1/latest/js/infragistics.lob.js"></script>
     <script>
+
+        var dom;
         $(function () {
-            dom = $("#checkboxSelectCombo").igCombo({
+            var colors= [
+                    {"name": "a", "value": "A"},
+                    {"name": "b", "value": "B"},
+                    {"name": "c", "value": "C"},
+                    {"name": "d", "value": "D"}
+                ];
+            dom = $("#checkboxSelectPartyCombo").igCombo({
                 id: "xxx",
                 width: 300,
                 dataSource: colors,
@@ -58,7 +79,5 @@
             background-color: #e8ebed;
         }
     </style>
-</body>
-</html>
 </body>
 </html>

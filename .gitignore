@@ -2,7 +2,6 @@
 *.log
 .idea/
 .settings/
-target/
 log/
 h2/
 dependency-reduced-pom.xml

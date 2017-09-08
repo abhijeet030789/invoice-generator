@@ -39,6 +39,6 @@ public class TransactionResource extends CRUDResource<Transaction>{
     @Path("/list")
     @Produces(MediaType.TEXT_HTML)
     public EntityListView<Transaction> getAll(){
-        return new EntityListView<Transaction>(crudRepository.findAll(), Transaction.class);
+        return new EntityListView<Transaction>(crudRepository.findAll(), Transaction.class, null);
     }
 }
