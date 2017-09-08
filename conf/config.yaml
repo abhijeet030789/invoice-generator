@@ -1,0 +1,29 @@
+# The maximum time to wait for Jetty, and all Managed instances,
+# to cleanly shutdown before forcibly terminating them.
+server:
+    applicationConnectors:
+        - type: http
+          port: 80
+    adminConnectors:
+        - type: http
+          port: 81
+    shutdownGracePeriod: 30s
+
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+    io.dropwizard: INFO
+  appenders:
+    - type: file
+      threshold: ALL
+      currentLogFilename: log/log.log
+      archive: true
+      archivedLogFilenamePattern: log/log-%d.log.gz
+      archivedFileCount: 20
+    - type: console

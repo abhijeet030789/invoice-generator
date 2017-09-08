@@ -1,0 +1,11 @@
+*.iml
+*.log
+.idea/
+.settings/
+target/
+log/
+h2/
+dependency-reduced-pom.xml
+.classpath
+.project
+.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties
