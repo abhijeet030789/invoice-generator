@@ -13,6 +13,9 @@
          <tr><td><b>Account Number</b></td> <td><input type="text" id="accountNumber" value="${(entity.accountNumber)!''}"></td></tr>
          <tr><td><b>IFSC Code</b></td> <td><input type="text" id="ifscCode" value="${(entity.ifscCode)!''}"></td></tr>
          <tr><td><b>Bank Branch</b></td> <td><input type="text" id="bankBranch" value="${(entity.bankBranch)!''}"></td></tr>
+         <tr><td> GST Enabled </td><td><input id="gstEnabled" type="text" maxlength="1" value="Y" /></td></tr>
+         <tr><td><b>Invoice Prefix</b></td> <td><input type="text" maxlength="4" id="invoicePrefix" value="${(entity.invoicePrefix)!''}"></td></tr>
+         <tr><td><b>Invoice Start Index</b></td> <td><input type="number" min="1" id="invoiceStartIndex" value="${(entity.invoiceStartIndex)!''}"></td></tr>
     </table>
     <p>
         <#if editMode >

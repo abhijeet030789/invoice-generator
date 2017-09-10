@@ -30,5 +30,14 @@ public class Firm implements Serializable {
     @Column(dbType = Type.STRING, nullable = false)  private String accountNumber;
     @Column(dbType = Type.STRING, nullable = false)  private String ifscCode;
     @Column(dbType = Type.STRING, nullable = false)  private String bankBranch;
+    @Column(dbType = Type.STRING, nullable = false)  private String gstEnabled = "Y";
+    @Column(dbType = Type.STRING, nullable = false)  private String invoicePrefix;
+    @Column(dbType = Type.INTEGER, nullable = false) private Integer invoiceStartIndex = 1;
+    @Column(dbType = Type.INTEGER, nullable = false) private Integer invoiceCurrentIndex;
+
+    public boolean isGst(){
+        return "Y".equalsIgnoreCase(gstEnabled);
+    }
+
 
 }

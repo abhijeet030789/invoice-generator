@@ -73,21 +73,24 @@
                 <th rowspan="2" style="width: 5%">Total</th>
                 <th rowspan="2" style="width: 5%">Discount</th>
                 <th rowspan="2" style="width: 5%">Taxable Amount</th>
-
-                <#if party.stateCode == firm.stateCode>
-                    <th style="width: 15%" colspan="2">CGST</th>
-                    <th style="width: 15%;" colspan="2">SGST</th>
-                <#else>
-                    <th style="width: 15%;" colspan="2">IGST</th>
+                <#if firm.gst>
+                    <#if party.stateCode == firm.stateCode>
+                        <th style="width: 15%" colspan="2">CGST</th>
+                        <th style="width: 15%;" colspan="2">SGST</th>
+                    <#else>
+                        <th style="width: 15%;" colspan="2">IGST</th>
+                    </#if>
                 </#if>
                 <th rowspan="2" style="width: 10%;">Amount</th>
             </tr>
         <tr style="height: 5%;">
-            <#if party.stateCode == firm.stateCode>
-                <td>Rate (%)</td><td>Amount</td>
-                <td>Rate (%)</td><td>Amount</td>
-            <#else>
-                <td>Rate (%)</td><td>Amount</td>
+            <#if firm.gst>
+                <#if party.stateCode == firm.stateCode>
+                    <td>Rate (%)</td><td>Amount</td>
+                    <td>Rate (%)</td><td>Amount</td>
+                <#else>
+                    <td>Rate (%)</td><td>Amount</td>
+                </#if>
             </#if>
         </tr>
 
@@ -102,38 +105,50 @@
                 <td>${bi.total?string(",##0.00")}</td>
                 <td>${bi.discount?string(",##0.00")}</td>
                 <td>${bi.taxableAmount?string(",##0.00")}</td>
-                <#if party.stateCode == firm.stateCode>
-                    <td>${bi.cgstRate?string(",##0.00")}</td>
-                    <td>${bi.cgstAmount?string(",##0.00")}</td>
-                    <td>${bi.sgstRate?string(",##0.00")}</td>
-                    <td>${bi.sgstAmount?string(",##0.00")}</td>
-                <#else>
-                    <td>${bi.igstRate?string(",##0.00")}</td>
-                    <td>${bi.igstAmount?string(",##0.00")}</td>
+                <#if firm.gst>
+                    <#if party.stateCode == firm.stateCode>
+                        <td>${bi.cgstRate?string(",##0.00")}</td>
+                        <td>${bi.cgstAmount?string(",##0.00")}</td>
+                        <td>${bi.sgstRate?string(",##0.00")}</td>
+                        <td>${bi.sgstAmount?string(",##0.00")}</td>
+                    <#else>
+                        <td>${bi.igstRate?string(",##0.00")}</td>
+                        <td>${bi.igstAmount?string(",##0.00")}</td>
+                    </#if>
                 </#if>
                 <td>${bi.amount?string(",##0.00")}</td>
             </tr>
         </#list>
 
         <tr style="height: 5%;">
-            <#if party.stateCode == firm.stateCode>
-                <th  colspan="9">Invoice Amount</th><th colspan="5">${total?string(",##0.00")}</th>
+            <#if firm.gst>
+                <#if party.stateCode == firm.stateCode>
+                    <th  colspan="9">Invoice Amount</th><th colspan="5">${total?string(",##0.00")}</th>
+                <#else>
+                    <th  colspan="9">Invoice Amount</th><th colspan="3">${total?string(",##0.00")}</th>
+                </#if>
             <#else>
-                <th  colspan="9">Invoice Amount</th><th colspan="3">${total?string(",##0.00")}</th>
+                    <th  colspan="5">Invoice Amount</th><th colspan="5">${total?string(",##0.00")}</th>
             </#if>
         </tr>
         <tr style="height: 5%;">
-            <#if party.stateCode == firm.stateCode>
-                <th colspan="9">Invoice Amount in Words</th><th colspan="5">${amountInWords}</th>
+            <#if firm.gst>
+                <#if party.stateCode == firm.stateCode>
+                    <th colspan="9">Invoice Amount in Words</th><th colspan="5">${amountInWords}</th>
+                <#else>
+                    <th colspan="9">Invoice Amount in Words</th><th colspan="3">${amountInWords}</th>
+                </#if>
             <#else>
-                <th colspan="9">Invoice Amount in Words</th><th colspan="3">${amountInWords}</th>
+                    <th colspan="5">Invoice Amount in Words</th><th colspan="5">${amountInWords}</th>
             </#if>
         </tr>
         <tr style="height: 5%;">
-            <#if party.stateCode == firm.stateCode>
-                <th colspan="9">GST Reverse Charges</th><th colspan="2"></th><th colspan="2"></th><th></th>
-            <#else>
-                <th colspan="9">GST Reverse Charges</th><th colspan="2"></th><th></th>
+            <#if firm.gst>
+                <#if party.stateCode == firm.stateCode>
+                    <th colspan="9">GST Reverse Charges</th><th colspan="2"></th><th colspan="2"></th><th></th>
+                <#else>
+                    <th colspan="9">GST Reverse Charges</th><th colspan="2"></th><th></th>
+                </#if>
             </#if>
         </tr>
     </table>

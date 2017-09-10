@@ -16,9 +16,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.raiabhij.transfomer.BilledItemToTransactionDetailsTransformer.getTransaction;
@@ -51,14 +49,21 @@ public class IndexResource {
     @Path("/invoice")
     public Response generateInvoice(InvoiceGenerationInput input) {
         Party party = PartyResource.getCRUDRepository().findOne(new JDBCParam("gstNo",input.getPartyGstNo()));
-        Firm firm = FirmResource.getCRUDRepository().findOne(new JDBCParam("gstNo",input.getFirmGstNo()));
-        String invoiceNumber = getInvoiceNumber(firm.getGstNo());
+        Firm firm = null;
+        synchronized (this) {
+            firm = FirmResource.getCRUDRepository().findOne(new JDBCParam("gstNo", input.getFirmGstNo()));
+            System.out.println("Before = "+ firm.getInvoiceCurrentIndex());
+            firm.setInvoiceCurrentIndex(firm.getInvoiceCurrentIndex() + 1);
+            FirmResource.getCRUDRepository().update(firm);
+            System.out.println("After = "+ firm.getInvoiceCurrentIndex());
+        }
+        String invoiceNumber = getInvoiceNumber(firm, input.isCash());
         List<TransactionDetail> transactionDetails = new ArrayList<>();
         int count = 1;
         double total = 0.0;
         for(ItemQuantity itemQuantity : input.getItemQuantities()){
             Item item = ItemResource.getCRUDRepository().findOne(new JDBCParam("code", itemQuantity.getItemCode()));
-            TransactionDetail transactionDetail = item.getTransactionDetail(invoiceNumber, count++, itemQuantity.getQuantity(), party.getStateCode() != firm.getStateCode());
+            TransactionDetail transactionDetail = item.getTransactionDetail(firm.isGst(), invoiceNumber, count++, itemQuantity.getQuantity(), party.getStateCode() != firm.getStateCode());
             transactionDetails.add(transactionDetail);
             total += transactionDetail.getAmount();
         };
@@ -67,9 +72,8 @@ public class IndexResource {
         return Response.contructSuccessResponse(invoiceNumber);
     }
 
-    private String getInvoiceNumber(final String firmGstNo){
-        SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDDHHmm");
-        return sdf.format(new Date());
+    private String getInvoiceNumber(final Firm  firm, boolean isCash){
+        return firm.getInvoicePrefix()+"-17/18"+ (isCash ? "-CA-" : "-CR-")+firm.getInvoiceCurrentIndex();
     }
 
 }

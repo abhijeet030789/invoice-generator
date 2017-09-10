@@ -26,7 +26,7 @@ public class Item implements Serializable {
     @Column(dbType = Type.DOUBLE, nullable=false) private Double gstRate;
 
 
-    public TransactionDetail getTransactionDetail(final String invoiceNo, final int slNo, final Double quantity, final boolean isIgst){
+    public TransactionDetail getTransactionDetail(final boolean isGstEnabled, final String invoiceNo, final int slNo, final Double quantity, final boolean isIgst){
         final TransactionDetail transactionDetail = new TransactionDetail(invoiceNo, slNo);
         transactionDetail.setItemName(this.getName());
         transactionDetail.setHsnCode(this.getHsnCode());
@@ -36,14 +36,16 @@ public class Item implements Serializable {
         transactionDetail.setTotal(this.rate * quantity);
         transactionDetail.setDiscount(0.00);
         transactionDetail.setTaxableAmount(transactionDetail.getTotal() - transactionDetail.getDiscount());
-        if(!isIgst) {
-            transactionDetail.setCgstRate(this.gstRate / 2);
-            transactionDetail.setCgstAmount(transactionDetail.getCgstRate() * transactionDetail.getTaxableAmount() * 0.01);
-            transactionDetail.setSgstRate(this.gstRate / 2);
-            transactionDetail.setSgstAmount(transactionDetail.getSgstRate() * transactionDetail.getTaxableAmount() * 0.01);
-        }else {
-            transactionDetail.setIgstRate(this.gstRate);
-            transactionDetail.setIgstAmount(transactionDetail.getIgstRate() * transactionDetail.getTaxableAmount() * 0.01);
+        if(isGstEnabled) {
+            if (!isIgst) {
+                transactionDetail.setCgstRate(this.gstRate / 2);
+                transactionDetail.setCgstAmount(transactionDetail.getCgstRate() * transactionDetail.getTaxableAmount() * 0.01);
+                transactionDetail.setSgstRate(this.gstRate / 2);
+                transactionDetail.setSgstAmount(transactionDetail.getSgstRate() * transactionDetail.getTaxableAmount() * 0.01);
+            } else {
+                transactionDetail.setIgstRate(this.gstRate);
+                transactionDetail.setIgstAmount(transactionDetail.getIgstRate() * transactionDetail.getTaxableAmount() * 0.01);
+            }
         }
         transactionDetail.setAmount(transactionDetail.getTaxableAmount()
                 + transactionDetail.getCgstAmount()

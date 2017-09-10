@@ -13,6 +13,7 @@ public class InvoiceGenerationInput {
     private String partyGstNo;
     private String firmGstNo;
     private List<String[]> itemList;
+    private boolean cash;
 
     public List<ItemQuantity> getItemQuantities(){
         List<ItemQuantity> list = new ArrayList<>();
