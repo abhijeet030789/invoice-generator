@@ -7,6 +7,7 @@ function entityX(entity, action){
         case "DELETE" : type = "DELETE"; break;
         default : throw "action not handled. action = " + action;
     }
+    var returnVal;
     $.ajax({
         type: type,	url: url, dataType: "json",
         contentType: "application/json; charset=utf-8",

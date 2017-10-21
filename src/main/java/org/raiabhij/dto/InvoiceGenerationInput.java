@@ -18,7 +18,7 @@ public class InvoiceGenerationInput {
     public List<ItemQuantity> getItemQuantities(){
         List<ItemQuantity> list = new ArrayList<>();
         for(String[] s : this.itemList){
-            list.add(new ItemQuantity(s[0], Double.valueOf(s[1])));
+            list.add(new ItemQuantity(s[0], Double.valueOf(s[1]), Double.valueOf(s[2]), Double.valueOf(s[3])));
         }
         return list;
     }

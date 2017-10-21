@@ -26,16 +26,11 @@ public class Item implements Serializable {
     @Column(dbType = Type.DOUBLE, nullable=false) private Double gstRate;
 
 
-    public TransactionDetail getTransactionDetail(final boolean isGstEnabled, final String invoiceNo, final int slNo, final Double quantity, final boolean isIgst){
-        final TransactionDetail transactionDetail = new TransactionDetail(invoiceNo, slNo);
+    public TransactionDetail getTransactionDetail(final boolean isGstEnabled, final String invoiceNo, final int slNo, final ItemQuantity itemQuantity, final boolean isIgst){
+        final TransactionDetail transactionDetail = new TransactionDetail(invoiceNo, slNo, itemQuantity);
         transactionDetail.setItemName(this.getName());
         transactionDetail.setHsnCode(this.getHsnCode());
         transactionDetail.setUnit(this.unit);
-        transactionDetail.setQuantity(quantity);
-        transactionDetail.setRate(this.rate);
-        transactionDetail.setTotal(this.rate * quantity);
-        transactionDetail.setDiscount(0.00);
-        transactionDetail.setTaxableAmount(transactionDetail.getTotal() - transactionDetail.getDiscount());
         if(isGstEnabled) {
             if (!isIgst) {
                 transactionDetail.setCgstRate(this.gstRate / 2);

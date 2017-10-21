@@ -1,5 +1,8 @@
 <html>
-<head><title></title>
+<head>
+<link rel="stylesheet"	href="./css/kendo.dataviz.min.css" />
+<link rel="stylesheet"	href="./css/kendo.dataviz.default.min.css" />
+<title></title>
 <body>
     <table>
          <tr><td><b>invoiceNo</b></td> <td><input type="text" id="invoiceNo" value="${(entity.invoiceNo)!''}"></td></tr>

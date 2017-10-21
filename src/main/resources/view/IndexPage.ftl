@@ -46,9 +46,9 @@
        </tr>
        <tr/>
        <tr>
-            <td> <font size="10">Select Item: </font> </td>
+            <td> <font size="10">Select Item:</font> </td>
             <td>
-                <select id="selectItem" >
+                <select id="selectItem" onchange="itemSelectPost();">
                     <optgroup>
                     <option disabled selected value> -- Select Item -- </option>
                     <#list itemList as item>
@@ -57,15 +57,16 @@
                     </optgroup>
                 </select>
             </td>
-            <td> <font size="12"> Quantity: </font></td>
-            <td> <input type="number" id="inputQuantity" min="1" max="9999999" /></td>
-            <td> <button id="buttonAddItem"> Add Item </button>
+            <td> <font size="12"> Quantity:</font></td> <td> <input type="number" id="inputQuantity" min="1" max="9999999" /></td>
+            <td> <font size="12"> Rate:</font></td>   <td> <input type="number" id="inputRate" min="1" max="9999999" /></td>
+            <td> <input hidden  type="number" id="actualRate" min="1" max="9999999" /></td>
+            <td> <button id="buttonAddItem"> Add Item </button></td>
        </tr>
        <tr>
           <table id="tableFinalItems" border="1" >
             <thead>
                 <tr>
-                     <th>Item</th> <th>Quantity</th> <th> </th>
+                     <th>Item</th> <th>Predefined Rate</th> <th>Proposed Rate</th> <th>Quantity</th> <th> </th>
                 </tr>
             </thead>
             <tbody>
@@ -92,8 +93,7 @@
                     if(quantity == ''){
                        alert("[ERROR] Hint: Please enter quantity");  return;
                     }
-                    var markup = "<tr><td>" + name + "</td><td>" + quantity + "</td>"+
-                        "<th><input type=\"button\" value=\"Delete\" /></th></tr>";
+                    var markup = "<tr><td>" + name + "</td><td>" + $("#actualRate").val() + "</td><td>"+ $("#inputRate").val() + "</td><td>"+ quantity + "</td>"+  "<th><input type=\"button\" value=\"Delete\" /></th></tr>";
                     $("#tableFinalItems tbody").append(markup);
            });
 
@@ -115,7 +115,7 @@
                });
                 entity["itemList"] = itemList;
                 if(itemList.length == 0){
-                    alert("[ERROR] Hint: Please select an item and enter its quantity"); return;
+                    alert("[ERROR] Hint: Please select an item and enter its quantity, then press 'Add Item' button."); return;
                 }
                 var str = JSON.stringify(entity);
                 $.ajax({
@@ -136,6 +136,17 @@
                    }
                 });
             });
+            function itemSelectPost(){
+                var url = getUrl() + "/json?id=" + $("#selectItem").val();
+                $.ajax({type: "GET", url: url,
+                        success:function(response) {
+                           if(response.success){
+                                $("#inputRate").val(response.t.rate);  $("#actualRate").val(response.t.rate);
+                           }else{alert(response.errorMsg);}
+                        },
+                        error:function(response) {alert(response.responseText);}
+                    });
+            }
        </script>
        <style>
        	    optgroup { font-size:16px; }

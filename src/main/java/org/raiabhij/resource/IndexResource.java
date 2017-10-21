@@ -63,7 +63,7 @@ public class IndexResource {
         double total = 0.0;
         for(ItemQuantity itemQuantity : input.getItemQuantities()){
             Item item = ItemResource.getCRUDRepository().findOne(new JDBCParam("code", itemQuantity.getItemCode()));
-            TransactionDetail transactionDetail = item.getTransactionDetail(firm.isGst(), invoiceNumber, count++, itemQuantity.getQuantity(), party.getStateCode() != firm.getStateCode());
+            TransactionDetail transactionDetail = item.getTransactionDetail(firm.isGst(), invoiceNumber, count++, itemQuantity, party.getStateCode() != firm.getStateCode());
             transactionDetails.add(transactionDetail);
             total += transactionDetail.getAmount();
         };
@@ -71,6 +71,8 @@ public class IndexResource {
         TransactionDetailResource.getCrudRepository().insert(transactionDetails);
         return Response.contructSuccessResponse(invoiceNumber);
     }
+
+
 
     private String getInvoiceNumber(final Firm  firm, boolean isCash){
         return firm.getInvoicePrefix()+"-17/18"+ (isCash ? "-CA-" : "-CR-")+firm.getInvoiceCurrentIndex();

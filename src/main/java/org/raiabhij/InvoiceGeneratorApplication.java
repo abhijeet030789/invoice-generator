@@ -1,12 +1,7 @@
 package org.raiabhij;
 
 import dwiveddi.ui.Application;
-import org.raiabhij.resource.FirmResource;
-import org.raiabhij.resource.IndexResource;
-import org.raiabhij.resource.ItemResource;
-import org.raiabhij.resource.PartyResource;
-import org.raiabhij.resource.TransactionDetailResource;
-import org.raiabhij.resource.TransactionResource;
+import org.raiabhij.resource.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +22,8 @@ public class InvoiceGeneratorApplication extends Application {
                 new PartyResource(),
                 new FirmResource(),
                 new TransactionResource(),
-                new TransactionDetailResource()
+                new TransactionDetailResource(),
+                new Test()
         );
     }
 
@@ -36,6 +32,7 @@ public class InvoiceGeneratorApplication extends Application {
         //FtlAndJsGenerator.main(new String[]{Firm.class.getName()});
         //FtlAndJsGenerator.main(new String[]{Transaction.class.getName()});
         //FtlAndJsGenerator.main(new String[]{TransactionDetail.class.getName()});
+        ConnectionFactory.getInstance().runDDLs();
         new InvoiceGeneratorApplication().run(args);
         ConnectionFactory.getInstance().runSeedSqls();
     }

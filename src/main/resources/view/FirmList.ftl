@@ -1,6 +1,8 @@
 <html>
 <head><title></title>
 <body>
+<a href="/" style="float: right;">Home</a>
+
 <div id="content">
    <table border="1" >
         <tr>

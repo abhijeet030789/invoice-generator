@@ -47,6 +47,8 @@ public class ConnectionFactory {
         }
     }
 
+
+
     public void runSeedSqls(){
         try (Connection connection = getConnection(); Statement st1 = connection.createStatement();) {
             /*if(CREATE_TABLE_STATEMENTS.length != 0) {
@@ -61,6 +63,45 @@ public class ConnectionFactory {
                     System.out.println("DEBUG : seed sql =  " + line);
                     if(!("".equals(line.trim()) || line.startsWith("--"))) {
                         st1.execute(line);
+                    }
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                throw new RuntimeException("", e);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("", e);
+        }
+    }
+
+    public void runDDLs(){
+        try (Connection connection = getConnection(); Statement st1 = connection.createStatement();) {
+            /*if(CREATE_TABLE_STATEMENTS.length != 0) {
+                for (String string : CREATE_TABLE_STATEMENTS) {
+                    st1.execute(string);
+                }
+            }*/
+            try(BufferedReader br = new BufferedReader(new FileReader("conf/ddl.sql"))){
+                String line;
+                while((line = br.readLine()) != null){
+                    line = line.trim();
+                    if(!("".equals(line.trim()) || line.startsWith("--"))) {
+                        boolean isOptional = false;
+                        if(line.startsWith("[OPTIONAL]")){
+                            isOptional = true;
+                            line = line.substring("[OPTIONAL]".length());
+                        }
+                        System.out.println("DEBUG : DDL =  " + line);
+                        try {
+                            st1.execute(line);
+                        }catch(SQLException e){
+                            if(isOptional){
+                                e.printStackTrace();
+                            }else{
+                                throw e;
+                            }
+                        }
                     }
                 }
             }catch (Exception e){

@@ -23,6 +23,7 @@ public class TransactionDetail implements Serializable{
     @Column(dbType = Type.STRING, nullable = false) private String hsnCode;
     @Column(dbType = Type.STRING, nullable = false) private String unit;
     @Column(dbType = Type.DOUBLE, nullable = false) private Double quantity;
+    @Column(dbType = Type.DOUBLE, nullable = false) private Double predefinedRate;
     @Column(dbType = Type.DOUBLE, nullable = false) private Double rate;
     @Column(dbType = Type.DOUBLE, nullable = false) private Double total;
     @Column(dbType = Type.DOUBLE, nullable = false) private Double discount = 0.0;
@@ -38,9 +39,15 @@ public class TransactionDetail implements Serializable{
     public TransactionDetail(){
     }
 
-    public TransactionDetail(String invoiceNo, Integer slNo){
+    public TransactionDetail(String invoiceNo, Integer slNo, ItemQuantity itemQuantity){
         this.setInvoiceNo(invoiceNo);
         this.setSlNo(slNo);
         this.id = invoiceNo + "-" + slNo;
+        this.quantity = itemQuantity.getQuantity();
+        this.rate = itemQuantity.getActualRate();
+        this.predefinedRate = itemQuantity.getPredefinedRate();
+        this.total = this.rate * this.quantity;
+        this.discount = 0.00;
+        this.taxableAmount = this.total - this.discount;
     }
 }

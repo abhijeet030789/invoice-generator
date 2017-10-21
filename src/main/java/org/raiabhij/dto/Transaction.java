@@ -8,6 +8,7 @@ import raiabhij.miniHibernate.repository.annotation.Entity;
 import raiabhij.miniHibernate.repository.annotation.Id;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by raiabhij on 8/21/2017.
@@ -22,4 +23,5 @@ public class Transaction implements Serializable{
     @Column(dbType = Type.STRING, nullable = false) private String partyGstNo;
     @Column(dbType = Type.STRING, nullable = false) private String partyName;
     @Column(dbType = Type.DOUBLE, nullable = false) private double totalAmount;
+    @Column(dbType = Type.DATE, nullable = false) private Date billingDate;
 }

@@ -1,17 +1,17 @@
 package org.raiabhij.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NonNull;
 
 /**
  * Created by raiabhij on 8/19/2017.
  */
-@Data
+@AllArgsConstructor
 public class ItemQuantity {
-    private String itemCode;
-    private double quantity;
-
-    public ItemQuantity(String itemCode, double quantity) {
-        this.itemCode = itemCode;
-        this.quantity = quantity;
-    }
+    @NonNull @Getter private final String itemCode;
+    @NonNull @Getter private final Double predefinedRate;
+    @NonNull @Getter private final Double actualRate;
+    @NonNull @Getter private final  double quantity;
 }
