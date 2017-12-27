@@ -35,8 +35,6 @@ public class TransactionDetailResource extends CRUDResource<TransactionDetail>{
     @Path("/list/filter")
     @Produces(MediaType.TEXT_HTML)
     public EntityListView<TransactionDetail> getAll(@NotNull @QueryParam("invoiceNo") String invoiceNo){
-        List<Party> list = PartyResource.getCRUDRepository().findAll();
-
         return new EntityListView<TransactionDetail>(crudRepository.findAll(new JDBCParam("invoiceNo", invoiceNo)), TransactionDetail.class, null);
     }
 

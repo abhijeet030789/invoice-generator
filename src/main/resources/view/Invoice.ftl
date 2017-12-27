@@ -7,14 +7,14 @@
                  <tr>
                    <td width="25%">
                     <table align="left">
-                        <tr><th>Invoice No:</th><th>${invoiceNo}</th></tr>
-                        <tr><th>Billing Date:</th><th>${currentDate?date}</th></tr>
+                        <tr><th>Invoice No</th><th>:</th><th>${invoiceNo}</th></tr>
+                        <tr><th>Billing Date</th><th>:</th><th>${currentDate?date}</th></tr>
                     </table>
                    </td>
                    <td width="50%">
                     <table align="center">
                         <tr><td align="center">TAX INVOICE</td></tr>
-                        <tr><td align="center"><strong>${firm.firmName}</strong></td></tr>
+                        <tr><td align="center"><font size="6"><strong>${firm.firmName}</strong></font></td></tr>
                         <tr><td align="center">${firm.addressLineOne!''}</td></tr>
                         <tr><td align="center">${firm.addressLineTwo!''}</td></tr>
                         <tr><td align="center">Phone: ${firm.phoneNumber!'N/A'}</td></tr>

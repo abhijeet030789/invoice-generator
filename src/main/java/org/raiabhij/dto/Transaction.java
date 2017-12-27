@@ -14,7 +14,7 @@ import java.util.Date;
  * Created by raiabhij on 8/21/2017.
  */
 
-@Entity(value = "Transaction", autoCreate = true)
+@Entity(value = "Transaction", autoCreate = true, defaultOrder = "order by billingDate desc")
 @ViewableEntity @Data
 public class Transaction implements Serializable{
     @Id @Column(dbType = Type.STRING, nullable = false) private String invoiceNo;
