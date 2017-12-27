@@ -124,12 +124,12 @@
                     <#if firm.gst>
                         <#if party.stateCode == firm.stateCode>
                             <th  colspan="9">Total</th>
-                            <th colspan="2">${totalCgst?string(",##0.00")}</th>
-                            <th colspan="2">${totalSgst?string(",##0.00")}</th>
+                            <th colspan="2" align="right">${totalCgst?string(",##0.00")}</th>
+                            <th colspan="2" align="right">${totalSgst?string(",##0.00")}</th>
                             <th>${total?string(",##0.00")}</th>
                         <#else>
                             <th  colspan="9">Total</th>
-                            <th colspan="2">${totalIgst?string(",##0.00")}</th>
+                            <th colspan="2" align="right">${totalIgst?string(",##0.00")}</th>
                             <th>${total?string(",##0.00")}</th>
                         </#if>
                     <#else>
