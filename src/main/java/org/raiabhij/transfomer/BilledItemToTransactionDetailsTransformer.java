@@ -16,7 +16,7 @@ public class BilledItemToTransactionDetailsTransformer {
         transaction.setFirmGstNo(firm.getGstNo());
         transaction.setFirmName(firm.getFirmName());
         transaction.setPartyGstNo(party.getGstNo());
-        transaction.setPartyName(party.getGstNo());
+        transaction.setPartyName(party.getName());
         transaction.setInvoiceNo(invoiceNumber);
         transaction.setTotalAmount(total);
         transaction.setBillingDate(new Date());
