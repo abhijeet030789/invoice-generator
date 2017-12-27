@@ -1,5 +1,5 @@
 <html>
-<head><title>Sri Ganeshay Namah</title></head>
+<head><title>Sri Ganeshaay Namah</title></head>
 <body>
    <div width="100%">
         <div class="container">
@@ -45,7 +45,7 @@
                                 <tr><td>Name:</td><td>${party.name}</td></tr>
                                 <tr><td>Address:</td><td>${party.address}</td></tr>
                                 <tr><td>GSTIN:</td><td>${party.gstNo}</td></tr>
-                                <tr><td border="1">State and State Code:</td><td>${party.state}</td>  <td>| ${party.stateCode} |</td></tr>
+                                <tr><td border="1">State and State Code:</td><td>${party.state} (${party.stateCode})</td></tr>
                             </table>
                         </td>
                         <td style="width: 50%">
@@ -62,7 +62,7 @@
         </div>
         <div><br /></div>
         <div>
-            <table style="width: 100%; height: 55%; text-align: center;" border="1">
+            <table style="width: 100%; height: 50%; text-align: center;" border="1">
                     <tr style="height: 5%;">
                         <th rowspan="2" style="width: 2%;">Sl. No1.</th>
                         <th rowspan="2" style="width: 10%;">Item</th>
@@ -157,7 +157,7 @@
         <div id="container">
           <div id="left">
             <table caption="Bank Details">
-                <tr><th align="left">Name</th><td>${firm.firmName}</td></tr>
+                <!--<tr><th align="left">Name</th><td>${firm.firmName}</td></tr>-->
                 <tr><th align="left">Bank Name</th><td>${firm.bankName}</td></tr>
                 <tr><th align="left">A/c No</th><td>${firm.accountNumber}</td></tr>
                 <tr><th align="left">Branch</th><td>${firm.bankBranch}</td> <th align="left">IFSC Code:</th><td>${firm.ifscCode}</td></tr>
