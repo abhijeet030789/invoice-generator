@@ -1,14 +1,14 @@
 <html>
 <head><title>Sri Ganeshaay Namah</title></head>
 <body>
-   <div width="100%">
+   <div width="100%" height="100%">
         <div class="container">
                <table width="100%">
                  <tr>
-                   <td width="25%">
+                   <td width="25%" valign="bottom">
                     <table align="left">
-                        <tr><th>Invoice No</th><th>:</th><th>${invoiceNo}</th></tr>
-                        <tr><th>Billing Date</th><th>:</th><th>${currentDate?date}</th></tr>
+                        <tr><th align="left"><font size="2">Invoice No</font></th><th>:</th><th align="left"><font size="2">${invoiceNo}</font></th></tr>
+                        <tr><th align="left"><font size="2">Billing Date</font></th><th>:</th><th align="left"><font size="2">${currentDate?date}</font></th></tr>
                     </table>
                    </td>
                    <td width="50%">
@@ -33,7 +33,7 @@
                 </table>
         </div>
 
-        <div>
+        <div height="15%">
             <table style="width: 100%;" border="1">
                 <tbody>
                     <tr>
@@ -54,6 +54,7 @@
                                 <tr><td>Address:</td><td>${party.address}</td></tr>
                                 <tr><td>GSTIN:</td><td>${party.gstNo}</td></tr>
                                 <tr><td border="1">State and State Code:</td><td>${party.state} (${party.stateCode})</td></tr>
+                                <tr><td>Transporter:</td><td>${(party.transporter)!"N/A"}</td></tr>
                             </table>
                         </td>
                     </tr>
@@ -124,59 +125,57 @@
                     <#if firm.gst>
                         <#if party.stateCode == firm.stateCode>
                             <th  colspan="9">Total</th>
-                            <th colspan="2" align="right">${totalCgst?string(",##0.00")}</th>
-                            <th colspan="2" align="right">${totalSgst?string(",##0.00")}</th>
-                            <th>${total?string(",##0.00")}</th>
+                            <td colspan="2" align="right">${totalCgst?string(",##0.00")}</td>
+                            <td colspan="2" align="right">${totalSgst?string(",##0.00")}</td>
+                            <td>${total?string(",##0.00")}</td>
                         <#else>
                             <th  colspan="9">Total</th>
-                            <th colspan="2" align="right">${totalIgst?string(",##0.00")}</th>
-                            <th>${total?string(",##0.00")}</th>
+                            <td colspan="2" align="right">${totalIgst?string(",##0.00")}</td>
+                            <td>${total?string(",##0.00")}</td>
                         </#if>
                     <#else>
-                            <th  colspan="5">Total</th><th colspan="5">${total?string(",##0.00")}</th>
+                            <th  colspan="5">Total</th><td colspan="5">${total?string(",##0.00")}</td>
                     </#if>
                 </tr>
                 <tr style="height: 5%;">
                     <#if firm.gst>
                         <#if party.stateCode == firm.stateCode>
-                            <th  colspan="9">Invoice Amount</th><th colspan="5">${roundedTotal?string(",##0.00")}</th>
+                            <th  colspan="5">Invoice Amount</th><th colspan="9"  align="right">${roundedTotal?string(",##0.00")}</th>
                         <#else>
-                            <th  colspan="9">Invoice Amount</th><th colspan="3">${roundedTotal?string(",##0.00")}</th>
+                            <th  colspan="5">Invoice Amount</th><th colspan="7" align="right">${roundedTotal?string(",##0.00")}</th>
                         </#if>
                     <#else>
-                            <th  colspan="5">Invoice Amount</th><th colspan="5">${roundedTotal?string(",##0.00")}</th>
+                            <th  colspan="4">Invoice Amount</th><th colspan="6" align="right">${roundedTotal?string(",##0.00")}</th>
                     </#if>
                 </tr>
                 <tr style="height: 5%;">
                     <#if firm.gst>
                         <#if party.stateCode == firm.stateCode>
-                            <th colspan="9">Invoice Amount in Words</th><th colspan="5">${amountInWords}</th>
+                            <th colspan="5">Invoice Amount in Words</th><th colspan="9" align="right">${amountInWords}</th>
                         <#else>
-                            <th colspan="9">Invoice Amount in Words</th><th colspan="3">${amountInWords}</th>
+                            <th colspan="5">Invoice Amount in Words</th><th colspan="7" align="right">${amountInWords}</th>
                         </#if>
                     <#else>
-                            <th colspan="5">Invoice Amount in Words</th><th colspan="5">${amountInWords}</th>
+                            <th colspan="4">Invoice Amount in Words</th><th colspan="6" align="right">${amountInWords}</th>
                     </#if>
                 </tr>
-                <!--<tr style="height: 5%;">
-                    <#if firm.gst>
-                        <#if party.stateCode == firm.stateCode>
-                            <th colspan="9">GST Reverse Charges</th><th colspan="2"></th><th colspan="2"></th><th></th>
-                        <#else>
-                            <th colspan="9">GST Reverse Charges</th><th colspan="2"></th><th></th>
-                        </#if>
-                    </#if>
-                </tr>-->
             </table>
         </div>
         <div><br /></div>
         <div id="container">
           <div id="left">
-            <table caption="Bank Details">
-                <tr><th align="left">Name</th><td>${firm.firmName}</td></tr>
+            <table caption="Bank Details" height="7%">
+                <!--<tr><th align="left">Name</th><td>${firm.firmName}</td></tr>-->
                 <tr><th align="left">Bank Name</th><td>${firm.bankName}</td></tr>
                 <tr><th align="left">A/c No</th><td>${firm.accountNumber}</td></tr>
-                <tr><th align="left">Branch</th><td>${firm.bankBranch}</td> <th align="left">IFSC Code:</th><td>${firm.ifscCode}</td></tr>
+                <tr><th align="left">Branch</th><td>${firm.bankBranch} (IFSC Code: ${firm.ifscCode})</td></tr>
+                <tr width="100%"><td  colspan="2"><hr></td></tr>
+                <tr><td colspan="2">
+                    <ul>
+                      <li>Subject to Kolkata Juridiction</li>
+                      <li>Please pay by NEFT, RTGS or A/c Payee cheque only</li>
+                    </ul>
+                </td></tr>
             </table>
           </div>
           <div id="center"></div>
@@ -207,6 +206,20 @@
     float:right;
     width:30%;
 }
+
+@media print {
+
+  html, body {
+    height:100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+
+}
+
+
+
 </style>
 </body>
 </html>

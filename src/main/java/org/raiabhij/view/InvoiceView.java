@@ -26,6 +26,7 @@ public class InvoiceView extends View {
     private final double total;
     private double totalCgst = 0.0;
     private double totalSgst = 0.0;
+    private double totalIgst = 0.0;
     private long roundedTotal;
 
     public InvoiceView(Party party, List<TransactionDetail> billedItems, double total, Firm firm, String invoiceNo) {
@@ -40,6 +41,7 @@ public class InvoiceView extends View {
         for(TransactionDetail item : this.billedItems){
             this.totalCgst += item.getCgstAmount();
             this.totalSgst += item.getSgstAmount();
+            this.totalIgst += item.getIgstAmount();
         }
     }
 
