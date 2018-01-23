@@ -7,6 +7,7 @@ function getEntity(){
 	"stateCode" : $("#stateCode").val(),
 	"phoneNumber" : $("#phoneNumber").val(),
 	"email" : $("#email").val(),
+	"transporter" : $("#transporter").val()
  };
  return entity;
 }

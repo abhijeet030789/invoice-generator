@@ -34,4 +34,9 @@ public class Party implements Serializable {
 
     @Column(dbType = Type.STRING, nullable = false) private String email;
 
+    @Column(dbType = Type.STRING, nullable = false) private String transporter;
+
+
+
+
 }

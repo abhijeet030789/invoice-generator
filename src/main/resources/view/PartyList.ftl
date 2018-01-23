@@ -6,16 +6,17 @@
 <div id="content">
    <table border="1" >
         <tr>
-            <th>gstNo</th><th>name</th><th>address</th><th>state</th><th>stateCode</th><th>phoneNumber</th><th>email</th>        </tr>
+            <th>Gst No</th><th>Name</th><th>Address</th><th>State</th><th>StateCode</th><th>PhoneNumber</th><th>Email</th><th>Transporter</th>        </tr>
         <#list entities as entity>
            <tr>
                <td><a href="/party?id=${(entity.gstNo)!''}" >${(entity.gstNo)!""}</a></td>
-<td>${(entity.name)!""}</td>
-<td>${(entity.address)!""}</td>
-<td>${(entity.state)!""}</td>
-<td>${(entity.stateCode)!""}</td>
-<td>${(entity.phoneNumber)!""}</td>
-<td>${(entity.email)!""}</td>
+                <td>${(entity.name)!""}</td>
+                <td>${(entity.address)!""}</td>
+                <td>${(entity.state)!""}</td>
+                <td>${(entity.stateCode)!""}</td>
+                <td>${(entity.phoneNumber)!""}</td>
+                <td>${(entity.email)!""}</td>
+                <td>${(entity.transporter)!""}</td>
            </tr>
        </#list>
    </table>
