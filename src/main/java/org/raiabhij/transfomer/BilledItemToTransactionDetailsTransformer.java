@@ -11,15 +11,16 @@ import java.util.Date;
  */
 public class BilledItemToTransactionDetailsTransformer {
 
-    public static Transaction getTransaction(Party party, Firm firm, double total, String invoiceNumber) {
+    public static Transaction getTransaction(Party party, Firm firm, double total, String invoiceNumber, double labourCharge) {
         Transaction transaction = new Transaction();
         transaction.setFirmGstNo(firm.getGstNo());
         transaction.setFirmName(firm.getFirmName());
         transaction.setPartyGstNo(party.getGstNo());
         transaction.setPartyName(party.getName());
         transaction.setInvoiceNo(invoiceNumber);
-        transaction.setTotalAmount(total);
+        transaction.setTotalAmount(total+labourCharge);
         transaction.setBillingDate(new Date());
+        transaction.setLabourCharge(labourCharge);
         return transaction;
     }
 }

@@ -3,7 +3,7 @@
 server:
     applicationConnectors:
         - type: http
-          port: 8080
+          port: 80
     adminConnectors:
         - type: http
           port: 81

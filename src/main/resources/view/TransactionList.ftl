@@ -42,6 +42,7 @@
                         {field: "firmName",title: "Firm's Name"},
                         {field: "partyGstNo",title: "Party's GST No"},
                         {field: "partyName",title: "Party's Name"},
+                        {field: "labourCharge",title: "Labour Charge"},
                         {field: "totalAmount",title: "Total Amount"},
                         {field: "billingDate",title: "Billing Date",template: "#= kendo.toString(new Date(billingDate), 'yyyy-MM-dd HH:mm') #"},
                         {field: "invoiceNo",  title: "Duplicate",

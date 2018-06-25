@@ -9,7 +9,6 @@
          <tr><td><b>firmGstNo</b></td> <td><input type="text" id="firmGstNo" value="${(entity.firmGstNo)!''}"></td></tr>
          <tr><td><b>firmName</b></td> <td><input type="text" id="firmName" value="${(entity.firmName)!''}"></td></tr>
          <tr><td><b>partyGstNo</b></td> <td><input type="text" id="partyGstNo" value="${(entity.partyGstNo)!''}"></td></tr>
-         <tr><td><b>partyName</b></td> <td><input type="text" id="partyName" value="${(entity.partyName)!''}"></td></tr>
          <tr><td><b>totalAmount</b></td> <td><input type="text" id="totalAmount" value="${(entity.totalAmount)!''}"></td></tr>
     </table>
     <p>

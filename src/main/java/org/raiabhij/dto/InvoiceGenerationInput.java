@@ -14,6 +14,7 @@ public class InvoiceGenerationInput {
     private String firmGstNo;
     private List<String[]> itemList;
     private boolean cash;
+    private double labourCharge;
 
     public List<ItemQuantity> getItemQuantities(){
         List<ItemQuantity> list = new ArrayList<>();

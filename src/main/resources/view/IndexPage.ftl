@@ -75,8 +75,12 @@
        </tr>
        </table>
        <br /> <br />
-       <input type="radio" name="payment" value="cash" checked /> Cash  <input type="radio" name="payment" value="credit" /> Credit
-       <br />
+       <input type="radio" name="payment" value="cash" checked /> Cash
+       <input type="radio" name="payment" value="credit" /> Credit
+       <br/>
+       <font> Labour Charge: </font> <input type="number" id="labourCharge" min="1" max="9999999" value="0.00" />
+       <br /> <br />
+       <img src="/assets/images/ExcelIcon.png" id="buttonGenerateExcelInvoice"> <br/><br />
        <button id="buttonGenerateInvoice"> Generate Invoice </button>
        <script src="/assets/js/jquery.min.js"></script>
        <script src="/assets/js/bootstrap.min.js"></script>
@@ -101,13 +105,21 @@
                $(this).closest('tr').remove();
            });
            $("#buttonGenerateInvoice").click(function(){
-                var partyGstNo = $("#selectParty").val();
+              generateInvoice(false);
+           });
+
+           $("#buttonGenerateExcelInvoice").click(function(){
+              generateInvoice(true);
+           });
+
+            function generateInvoice(isExcel){
+               var partyGstNo = $("#selectParty").val();
                var payment = $("input[type='radio'][name='payment']:checked").val();
                var isCash = payment == 'cash' ? true : false;
                if(null == partyGstNo || '' == partyGstNo){
                      alert("[ERROR] Hint: Please select an buyer."); return;
                }
-               var entity = {"partyGstNo" : partyGstNo, "firmGstNo" : $("#selectFirm").val(), "cash" : isCash};
+               var entity = {"partyGstNo" : partyGstNo, "firmGstNo" : $("#selectFirm").val(), "cash" : isCash, "labourCharge" : $("#labourCharge").val()};
                var itemList = $('table#tableFinalItems tbody tr').get().map(function(row) {
                  return $(row).find('td').get().map(function(cell) {
                    return $(cell).html();
@@ -126,7 +138,11 @@
                    success:function(response) {
                       if(response.success){
                           //alert(response.t);
-                          window.open("/invoice?invoiceNumber="+response.t).reload();
+                          if(!isExcel){
+                            window.open("/invoice?invoiceNumber="+response.t).reload();
+                          }else{
+                            window.open("/invoiceExcel?invoiceNumber="+response.t).reload();
+                          }
                       }else{
                           alert(response.errorMsg);
                       }
@@ -135,7 +151,8 @@
                        alert(response.responseText);
                    }
                 });
-            });
+            }
+
             function itemSelectPost(){
                 var url = getUrl() + "/json?id=" + $("#selectItem").val();
                 $.ajax({type: "GET", url: url,

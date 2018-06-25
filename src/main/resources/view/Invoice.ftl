@@ -13,7 +13,9 @@
                    </td>
                    <td width="50%">
                     <table align="center">
-                        <tr><td align="center">TAX INVOICE</td></tr>
+                        <tr><td align="center">TAX INVOICE</td><td><a href="#" id="bottle" onclick="window.location='/invoiceExcel?invoiceNumber=${invoiceNo}'" >
+                                                                                      <img src="/assets/images/ExcelIcon.png" alt="bottle" class="thumbnails" />
+                                                                                  </a></td></tr>
                         <tr><td align="center"><font size="5"><strong>${firm.firmName}</strong></font></td></tr>
                         <tr><td align="center">${firm.addressLineOne!''}</td></tr>
                         <tr><td align="center">${firm.addressLineTwo!''}</td></tr>

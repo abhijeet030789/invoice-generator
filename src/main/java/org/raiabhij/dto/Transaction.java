@@ -24,4 +24,5 @@ public class Transaction implements Serializable{
     @Column(dbType = Type.STRING, nullable = false) private String partyName;
     @Column(dbType = Type.DOUBLE, nullable = false) private double totalAmount;
     @Column(dbType = Type.DATE, nullable = false) private Date billingDate;
+    @Column(dbType = Type.DOUBLE, nullable = true) private double labourCharge;
 }
