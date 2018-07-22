@@ -162,15 +162,15 @@ public class IndexResource {
 
             createRow(sheet, rowIndex++, 4, new String[]{
                     transactionDetail.getItemName(),
-                    String.valueOf(transactionDetail.getRate()),
-                    String.valueOf(transactionDetail.getQuantity()),
-                    String.valueOf(transactionDetail.getTotal())
+                    getRoundedOff(transactionDetail.getRate()),
+                    getRoundedOff(transactionDetail.getQuantity()),
+                    getRoundedOff(transactionDetail.getTotal())
             }, withBorder);
         }
         createRow(sheet, rowIndex++, 4, new String[]{"", "", "", ""}, withBorder);
-        createRow(sheet, rowIndex++, 4, new String[]{"Labour Charge","","",String.valueOf(transaction.getLabourCharge())}, withBorder);
+        createRow(sheet, rowIndex++, 4, new String[]{"Labour Charge","","",getRoundedOff(transaction.getLabourCharge())}, withBorder);
         sheet.addMergedRegion(new CellRangeAddress(rowIndex-1,rowIndex-1,0,2));
-        createRow(sheet, rowIndex++, 4, new String[]{"TOTAL","","",String.valueOf(transaction.getTotalAmount())}, boldStyle);
+        createRow(sheet, rowIndex++, 4, new String[]{"TOTAL","","",getRoundedOff(transaction.getTotalAmount())}, boldStyle);
         sheet.addMergedRegion(new CellRangeAddress(rowIndex-1,rowIndex-1,0,2));
     }
 
@@ -206,5 +206,22 @@ public class IndexResource {
             cell.setCellStyle(style);
             columnIndex++;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getRoundedOff(2.5000));
+        System.out.println(getRoundedOff(2.000));
+        System.out.println(getRoundedOff(2));
+        System.out.println(getRoundedOff(2.75));
+        System.out.println(getRoundedOff(2.4999));
+
+    }
+
+    private static String getRoundedOff(double d){
+        int intVal = (int)Math.round(d);
+        if((d - intVal) ==0){
+            return String.valueOf(intVal);
+        }
+        return String.valueOf((double) Math.round(d * 100) / 100);
     }
 }
